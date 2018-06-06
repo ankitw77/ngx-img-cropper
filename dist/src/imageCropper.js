@@ -718,15 +718,12 @@ var ImageCropper = /** @class */ (function (_super) {
             var scaledW = actualH / this.aspectRatio;
             var scaledH = actualW * this.aspectRatio;
             if (this.getCropBounds().height === cropPosition.height) {
-                // only width changed
                 actualH = scaledH;
             }
             else if (this.getCropBounds().width === cropPosition.width) {
-                // only height changed
                 actualW = scaledW;
             }
             else {
-                // height and width changed
                 if (Math.abs(scaledH - actualH) < Math.abs(scaledW - actualW)) {
                     actualW = scaledW;
                 }
@@ -750,10 +747,7 @@ var ImageCropper = /** @class */ (function (_super) {
         return this.croppedImage ? this.croppedImage : document.createElement('img');
     };
     // todo: Unused parameters?
-    // todo: Unused parameters?
-    ImageCropper.prototype.getCroppedImage = 
-    // todo: Unused parameters?
-    function (preserveSize, fillWidth, fillHeight) {
+    ImageCropper.prototype.getCroppedImage = function (preserveSize, fillWidth, fillHeight) {
         var bounds = this.getBounds();
         if (!this.srcImage) {
             return document.createElement('img');
@@ -889,53 +883,44 @@ var ImageCropper = /** @class */ (function (_super) {
                         }
                         if (distance > this.previousDistance) {
                             if (bounds.top !== this.minYClamp && bounds.bottom !== this.maxYClamp && bounds.left !== this.minXClamp && bounds.right !== this.maxXClamp) {
-                                // none
                                 bounds.top -= 1;
                                 bounds.left -= 1;
                                 bounds.right += 1;
                                 bounds.bottom += 1;
                             }
                             else if (bounds.top !== this.minYClamp && bounds.bottom !== this.maxYClamp && bounds.left === this.minXClamp && bounds.right !== this.maxXClamp) {
-                                // left
                                 bounds.top -= 1;
                                 bounds.right += 2;
                                 bounds.bottom += 1;
                             }
                             else if (bounds.top !== this.minYClamp && bounds.bottom !== this.maxYClamp && bounds.left !== this.minXClamp && bounds.right === this.maxXClamp) {
-                                // right
                                 bounds.top -= 1;
                                 bounds.left -= 2;
                                 bounds.bottom += 1;
                             }
                             else if (bounds.top === this.minYClamp && bounds.bottom !== this.maxYClamp && bounds.left !== this.minXClamp && bounds.right !== this.maxXClamp) {
-                                // top
                                 bounds.left -= 1;
                                 bounds.right += 1;
                                 bounds.bottom += 2;
                             }
                             else if (bounds.top !== this.minYClamp && bounds.bottom === this.maxYClamp && bounds.left !== this.minXClamp && bounds.right !== this.maxXClamp) {
-                                // bottom
                                 bounds.top -= 2;
                                 bounds.left -= 1;
                                 bounds.right += 1;
                             }
                             else if (bounds.top === this.minYClamp && bounds.bottom !== this.maxYClamp && bounds.left === this.minXClamp && bounds.right !== this.maxXClamp) {
-                                // top left
                                 bounds.right += 2;
                                 bounds.bottom += 2;
                             }
                             else if (bounds.top === this.minYClamp && bounds.bottom !== this.maxYClamp && bounds.left !== this.minXClamp && bounds.right === this.maxXClamp) {
-                                // top right
                                 bounds.left -= 2;
                                 bounds.bottom += 2;
                             }
                             else if (bounds.top !== this.minYClamp && bounds.bottom === this.maxYClamp && bounds.left === this.minXClamp && bounds.right !== this.maxXClamp) {
-                                // bottom left
                                 bounds.top -= 2;
                                 bounds.right += 2;
                             }
                             else if (bounds.top !== this.minYClamp && bounds.bottom === this.maxYClamp && bounds.left !== this.minXClamp && bounds.right === this.maxXClamp) {
-                                // bottom right
                                 bounds.top -= 2;
                                 bounds.left -= 2;
                             }
@@ -1081,10 +1066,7 @@ var ImageCropper = /** @class */ (function (_super) {
         }
     };
     // http://stackoverflow.com/questions/11929099/html5-canvas-drawimage-ratio-bug-ios
-    // http://stackoverflow.com/questions/11929099/html5-canvas-drawimage-ratio-bug-ios
-    ImageCropper.prototype.drawImageIOSFix = 
-    // http://stackoverflow.com/questions/11929099/html5-canvas-drawimage-ratio-bug-ios
-    function (ctx, img, sx, sy, sw, sh, dx, dy, dw, dh) {
+    ImageCropper.prototype.drawImageIOSFix = function (ctx, img, sx, sy, sw, sh, dx, dy, dw, dh) {
         // Works only if whole image is displayed:
         // ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);
         // The following works correct also when only a part of the image is displayed:
