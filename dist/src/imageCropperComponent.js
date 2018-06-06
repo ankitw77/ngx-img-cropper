@@ -1,4 +1,4 @@
-import { Component, Input, Renderer2, ViewChild, Output, EventEmitter } from "@angular/core";
+import { Component, Input, Renderer2, ViewChild, ElementRef, Output, EventEmitter } from "@angular/core";
 import { ImageCropper } from "./imageCropper";
 import { CropperSettings } from "./cropperSettings";
 import { Exif } from "./exif";
@@ -227,16 +227,16 @@ var ImageCropperComponent = /** @class */ (function () {
         { type: Renderer2, },
     ]; };
     ImageCropperComponent.propDecorators = {
-        'cropcanvas': [{ type: ViewChild, args: ["cropcanvas", undefined,] },],
-        'fileInput': [{ type: ViewChild, args: ["fileInput",] },],
-        'settings': [{ type: Input, args: ["settings",] },],
-        'image': [{ type: Input, args: ["image",] },],
-        'inputImage': [{ type: Input, args: ["inputImage",] },],
-        'cropper': [{ type: Input },],
-        'cropPosition': [{ type: Input },],
-        'cropPositionChange': [{ type: Output },],
-        'onCrop': [{ type: Output },],
-        'imageSet': [{ type: Output },],
+        "cropcanvas": [{ type: ViewChild, args: ["cropcanvas", undefined,] },],
+        "fileInput": [{ type: ViewChild, args: ["fileInput",] },],
+        "settings": [{ type: Input, args: ["settings",] },],
+        "image": [{ type: Input, args: ["image",] },],
+        "inputImage": [{ type: Input, args: ["inputImage",] },],
+        "cropper": [{ type: Input },],
+        "cropPosition": [{ type: Input },],
+        "cropPositionChange": [{ type: Output },],
+        "onCrop": [{ type: Output },],
+        "imageSet": [{ type: Output },],
     };
     return ImageCropperComponent;
 }());

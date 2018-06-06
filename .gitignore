@@ -1,5 +1,4 @@
 /typings
-/dist
 src/**/*.js.map
 src/**/*.d.ts
 src/**/*.js
@@ -17,9 +16,6 @@ build.xml
 node_modules/*
 npm-debug.log
 coverage
-dist/img-cropper-test-app.d.ts
-dist/img-cropper-test-app.js
-dist/img-cropper-test-app.js.map
 !karma.conf.js
 !karma-test-shim.js
 !make.js
