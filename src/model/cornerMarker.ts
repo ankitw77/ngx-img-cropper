@@ -123,7 +123,7 @@ export class CornerMarker extends Handle implements ICornerMarker {
     );
     ctx.closePath();
     ctx.fillStyle =
-      this.cropperSettings.cropperDrawSettings.strokeColor ||
+      this.cropperSettings.cropperDrawSettings.cornerMarkerFillColor ||
       "rgba(255,255,255,.7)";
     ctx.fill();
   }
