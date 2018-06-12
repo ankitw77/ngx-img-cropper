@@ -44,6 +44,7 @@ export class ImageCropperComponent
   @Input("settings") public settings: CropperSettings;
   @Input("image") public image: any;
   @Input("inputImage") public inputImage: any;
+  @Input() public imageZoom: number = 1;
   @Input() public cropper: ImageCropper;
   @Input() public cropPosition: CropPosition;
   @Output()
@@ -98,6 +99,7 @@ export class ImageCropperComponent
       this.cropper = new ImageCropper(this.settings);
     }
 
+    this.cropper.setImageZoom(this.imageZoom);
     this.cropper.prepare(canvas);
   }
 
@@ -121,6 +123,11 @@ export class ImageCropperComponent
       this.image.image = this.cropper.getCroppedImageHelper().src;
       this.onCrop.emit(this.cropper.getCropBounds());
     }
+
+    if(changes.imageZoom && !!this.cropper && this.cropper.setImageZoom){
+      this.cropper.setImageZoom(changes.imageZoom.currentValue);
+    }
+
   }
 
   public ngOnDestroy() {

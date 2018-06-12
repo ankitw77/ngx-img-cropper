@@ -13,6 +13,7 @@ export class ImageCropper extends ImageCropperModel {
 
     private crop:ImageCropper;
     private cropperSettings:CropperSettings;
+    private imageZoom : number = 1;
     private previousDistance:number;
 
     constructor(cropperSettings:CropperSettings) {
@@ -188,6 +189,10 @@ export class ImageCropper extends ImageCropperModel {
         }
     }
 
+    public setImageZoom(scale:number):void {
+        this.imageZoom =  (scale && !isNaN(scale)) ? scale : 1;
+    }
+
     public reset():void {
         this.setImage(undefined);
     }
@@ -207,15 +212,16 @@ export class ImageCropper extends ImageCropperModel {
                 h = this.canvasHeight;
                 w = this.canvasHeight / sourceAspect;
             }
+
+            w *= this.imageZoom;
+            h *= this.imageZoom;
+
             this.ratioW = w / this.srcImage.width;
             this.ratioH = h / this.srcImage.height;
-            if (canvasAspect < sourceAspect) {
-                this.drawImageIOSFix(ctx, this.srcImage, 0, 0, this.srcImage.width, this.srcImage.height,
-                    this.buffer.width / 2 - w / 2, 0, w, h);
-            } else {
-                this.drawImageIOSFix(ctx, this.srcImage, 0, 0, this.srcImage.width, this.srcImage.height, 0,
-                    this.buffer.height / 2 - h / 2, w, h);
-            }
+
+            this.drawImageIOSFix(ctx, this.srcImage, 0, 0, this.srcImage.width, this.srcImage.height,
+                (this.buffer.width - w) / 2 , (this.buffer.height - h) / 2, w, h);
+  
             (<CanvasRenderingContext2D> this.buffer.getContext('2d'))
                 .drawImage(this.canvas, 0, 0, this.canvasWidth, this.canvasHeight);
 
@@ -612,6 +618,10 @@ export class ImageCropper extends ImageCropperModel {
             h = this.canvas.height;
             w = this.canvas.height / sourceAspect;
         }
+
+        w = (w * this.imageZoom > this.canvas.width) ?  this.canvas.width : w * this.imageZoom;
+        h = (h * this.imageZoom > this.canvas.height) ?  this.canvas.height : h * this.imageZoom;
+
         this.minXClamp = this.canvas.width / 2 - w / 2;
         this.minYClamp = this.canvas.height / 2 - h / 2;
         this.maxXClamp = this.canvas.width / 2 + w / 2;
@@ -706,6 +716,9 @@ export class ImageCropper extends ImageCropperModel {
         let cX:number = this.canvas.width / 2;
         let cY:number = this.canvas.height / 2;
 
+        w *= this.imageZoom;
+        h *= this.imageZoom;
+
         if (cropAspect > sourceAspect) {
             let imageH = Math.min(w * sourceAspect, h);
             let cropW = imageH / cropAspect;
@@ -791,6 +804,7 @@ export class ImageCropper extends ImageCropperModel {
             let canvasAspect:number = this.canvas.height / this.canvas.width;
             let w:number = this.canvas.width;
             let h:number = this.canvas.height;
+
             if (canvasAspect > sourceAspect) {
                 w = this.canvas.width;
                 h = this.canvas.width * sourceAspect;
@@ -803,8 +817,13 @@ export class ImageCropper extends ImageCropperModel {
                     w = this.canvas.width;
                 }
             }
+
+            w *= this.imageZoom;
+            h *= this.imageZoom;
+
             this.ratioW = w / this.srcImage.width;
             this.ratioH = h / this.srcImage.height;
+
             let offsetH:number = (this.buffer.height - h) / 2 / this.ratioH;
             let offsetW:number = (this.buffer.width - w) / 2 / this.ratioW;
 
