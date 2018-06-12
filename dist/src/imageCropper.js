@@ -176,6 +176,11 @@ var ImageCropper = /** @class */ (function (_super) {
             this.setImage(this.srcImage);
         }
     };
+    ImageCropper.prototype.redrawImage = function () {
+        if (this.isImageSet()) {
+            this.setImage(this.srcImage);
+        }
+    };
     ImageCropper.prototype.setImageZoom = function (scale) {
         this.imageZoom = (scale && !isNaN(scale)) ? scale : 1;
     };

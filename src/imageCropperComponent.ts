@@ -126,6 +126,7 @@ export class ImageCropperComponent
 
     if(changes.imageZoom && !!this.cropper && this.cropper.setImageZoom){
       this.cropper.setImageZoom(changes.imageZoom.currentValue);
+      this.cropper.redrawImage();
     }
 
   }
