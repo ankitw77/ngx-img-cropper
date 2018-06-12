@@ -685,8 +685,8 @@ var ImageCropper = /** @class */ (function (_super) {
         var cropAspect = cropBounds.height / cropBounds.width;
         var cX = this.canvas.width / 2;
         var cY = this.canvas.height / 2;
-        w *= this.imageZoom;
-        h *= this.imageZoom;
+        w = (w * this.imageZoom > this.canvasWidth) ? this.canvasWidth : w * this.imageZoom;
+        h = (h * this.imageZoom > this.canvasHeight) ? this.canvasHeight : h * this.imageZoom;
         if (cropAspect > sourceAspect) {
             var imageH = Math.min(w * sourceAspect, h);
             var cropW = imageH / cropAspect;

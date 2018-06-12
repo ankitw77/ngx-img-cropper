@@ -724,8 +724,8 @@ export class ImageCropper extends ImageCropperModel {
         let cX: number = this.canvas.width / 2;
         let cY: number = this.canvas.height / 2;
 
-        w *= this.imageZoom;
-        h *= this.imageZoom;
+        w = (w * this.imageZoom > this.canvasWidth) ? this.canvasWidth : w * this.imageZoom;
+        h = (h * this.imageZoom > this.canvasHeight) ? this.canvasHeight : h * this.imageZoom;
 
         if (cropAspect > sourceAspect) {
             let imageH = Math.min(w * sourceAspect, h);
