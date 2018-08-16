@@ -48,9 +48,7 @@ export class ImageCropperComponent
   @Input() public cropper: ImageCropper;
   @Input() public cropPosition: CropPosition;
   @Output()
-  public cropPositionChange: EventEmitter<CropPosition> = new EventEmitter<
-    CropPosition
-  >();
+  public cropPositionChange: EventEmitter<CropPosition> = new EventEmitter<CropPosition>();
 
   @Output() public onCrop: EventEmitter<any> = new EventEmitter();
   @Output() imageSet: EventEmitter<boolean> = new EventEmitter<boolean>();

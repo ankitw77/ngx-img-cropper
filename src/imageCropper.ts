@@ -729,14 +729,15 @@ export class ImageCropper extends ImageCropperModel {
 
         if (cropAspect > sourceAspect) {
             let imageH = Math.min(w * sourceAspect, h);
-            let cropW = imageH / cropAspect;
+            let cropW = (this.cropperSettings.showFullCropInitial) ?  Math.min(h / sourceAspect, w) : imageH / cropAspect;
             tlPos = PointPool.instance.borrow(cX - cropW / 2, cY + imageH / 2);
             trPos = PointPool.instance.borrow(cX + cropW / 2, cY + imageH / 2);
             blPos = PointPool.instance.borrow(cX - cropW / 2, cY - imageH / 2);
             brPos = PointPool.instance.borrow(cX + cropW / 2, cY - imageH / 2);
         } else {
             let imageW = Math.min(h / sourceAspect, w);
-            let cropH = imageW * cropAspect;
+            let cropH = (this.cropperSettings.showFullCropInitial) ?  Math.min(w * sourceAspect, h) : imageW * cropAspect;
+
             tlPos = PointPool.instance.borrow(cX - imageW / 2, cY + cropH / 2);
             trPos = PointPool.instance.borrow(cX + imageW / 2, cY + cropH / 2);
             blPos = PointPool.instance.borrow(cX - imageW / 2, cY - cropH / 2);

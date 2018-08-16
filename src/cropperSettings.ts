@@ -27,6 +27,7 @@ export interface ICropperSettings {
   compressRatio?: number;
   rounded?: boolean;
   keepAspect?: boolean;
+  showFullCropInitial?: boolean;
 }
 
 export class CropperSettings implements ICropperSettings {
@@ -64,6 +65,8 @@ export class CropperSettings implements ICropperSettings {
   public preserveSize: boolean = false;
 
   public compressRatio: number = 1.0;
+
+  public showFullCropInitial: boolean = false;
 
   private _rounded: boolean = false;
   private _keepAspect: boolean = true;
